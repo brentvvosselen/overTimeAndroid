@@ -1,5 +1,6 @@
 package com.example.brentvanvosselen.overtime;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -24,7 +25,7 @@ public class ListActivity extends AppCompatActivity {
             public void onClick(View view) {
                /* Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
-
+               addProduct();
             }
         });
     }
@@ -49,5 +50,11 @@ public class ListActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //start the addProduct activity
+    public void addProduct(){
+        Intent intent = new Intent(this,AddProductActivity.class);
+        startActivity(intent);
     }
 }
