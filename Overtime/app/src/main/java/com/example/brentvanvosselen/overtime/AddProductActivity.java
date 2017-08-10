@@ -45,24 +45,6 @@ public class AddProductActivity extends AppCompatActivity {
                         quantityTxt.setText("");
                 }
             });
-            final EditText packagingTxt = (EditText)findViewById(R.id.packaging_txt);
-            packagingTxt.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    if(editable.length() == 1 && editable.toString().equals("0"))
-                        packagingTxt.setText("");
-                }
-            });
         /*Initialize the datepicker*/
         DatePicker expirationDatePicker = (DatePicker)findViewById(R.id.expiration_date_picker);
         /*Initialize the button + onclick event*/
