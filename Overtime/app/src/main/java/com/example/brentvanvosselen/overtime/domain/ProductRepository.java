@@ -11,10 +11,18 @@ import java.util.List;
 public class ProductRepository {
     private List<Product> products;
     public ProductRepository(){
-        products = new ArrayList<Product>();
+        products = new ArrayList<>();
     }
 
     public void addProduct(String name, int quantity, Date expirationDate){
         products.add(new Product(name,quantity,expirationDate));
+    }
+
+    public List<String> getProductNames() {
+        List<String> pn = new ArrayList<>();
+        for (Product p:products) {
+            pn.add(p.getName());
+        }
+        return pn;
     }
 }

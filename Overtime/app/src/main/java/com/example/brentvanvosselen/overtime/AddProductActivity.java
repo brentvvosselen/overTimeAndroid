@@ -1,5 +1,7 @@
 package com.example.brentvanvosselen.overtime;
 
+import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +12,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+
+import com.example.brentvanvosselen.overtime.domain.DomainController;
 
 import java.util.Date;
 
@@ -46,18 +50,35 @@ public class AddProductActivity extends AppCompatActivity {
                 }
             });
         /*Initialize the datepicker*/
-        DatePicker expirationDatePicker = (DatePicker)findViewById(R.id.expiration_date_picker);
+        final DatePicker expirationDatePicker = (DatePicker)findViewById(R.id.expiration_date_picker);
         /*Initialize the button + onclick event*/
         Button addBtn = (Button)findViewById(R.id.add_btn);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nameTxt.setText("test");
-            }
+
+                String name = nameTxt.getText().toString();
+                int quantity = Integer.parseInt(quantityTxt.getText().toString());
+                Date expirationDate = new Date(expirationDatePicker.getYear() - 1900,expirationDatePicker.getMonth(),expirationDatePicker.getDayOfMonth());
+
+                try{
+                    DomainController.getInstance().addProduct(name,quantity,expirationDate);
+                    showListActivity();
+
+                }catch(IllegalArgumentException ex){
+                      Snackbar.make(view, ex.getMessage(), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                }
+              }
         });
 
 
 
 
+    }
+
+    private void showListActivity(){
+        Intent intent = new Intent(this,ListActivity.class);
+        startActivity(intent);
     }
 }

@@ -9,6 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.example.brentvanvosselen.overtime.domain.DomainController;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -28,6 +31,9 @@ public class ListActivity extends AppCompatActivity {
                addProduct();
             }
         });
+
+        TextView list = (TextView)findViewById(R.id.list);
+        list.setText(renderList());
     }
 
     @Override
@@ -53,8 +59,16 @@ public class ListActivity extends AppCompatActivity {
     }
 
     //start the addProduct activity
-    public void addProduct(){
+    private void addProduct(){
         Intent intent = new Intent(this,AddProductActivity.class);
         startActivity(intent);
+    }
+
+    private String renderList(){
+        String txt = "";
+        for (String name: DomainController.getInstance().getProductNames()) {
+            txt += name + " , ";
+        }
+        return txt;
     }
 }

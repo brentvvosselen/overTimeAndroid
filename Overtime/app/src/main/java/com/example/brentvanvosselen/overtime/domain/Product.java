@@ -16,6 +16,7 @@ public class Product {
         this.name = name;
         checkQuantity(quantity);
         this.quantity = quantity;
+        checkExpirationDate(expirationDate);
         this.expirationDate = expirationDate;
     }
 
@@ -41,6 +42,7 @@ public class Product {
     }
 
     public void setExpirationDate(Date expirationDate) {
+        checkExpirationDate(expirationDate);
         this.expirationDate = expirationDate;
     }
 
