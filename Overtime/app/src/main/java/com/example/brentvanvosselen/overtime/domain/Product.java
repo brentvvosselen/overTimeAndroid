@@ -13,6 +13,7 @@ public class Product {
     private Date expirationDate;
 
     public Product(String name, int quantity, Date expirationDate) {
+        checkName(name);
         this.name = name;
         checkQuantity(quantity);
         this.quantity = quantity;
@@ -25,6 +26,8 @@ public class Product {
     }
 
     public void setName(String name) {
+
+        checkName(name);
         this.name = name;
     }
 
@@ -57,6 +60,10 @@ public class Product {
         if(now.after(expirationDate)){
             throw new IllegalArgumentException("The expirationdate must be tomorrow or later");
         }
+    }
 
+    private void checkName(String name){
+       if (name.isEmpty() || name.trim().isEmpty())
+                throw new IllegalArgumentException("The name can't be empty");
     }
 }

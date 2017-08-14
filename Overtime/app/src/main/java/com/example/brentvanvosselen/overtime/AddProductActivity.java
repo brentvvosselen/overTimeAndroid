@@ -57,19 +57,22 @@ public class AddProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String name = nameTxt.getText().toString();
-                int quantity = Integer.parseInt(quantityTxt.getText().toString());
-                Date expirationDate = new Date(expirationDatePicker.getYear() - 1900,expirationDatePicker.getMonth(),expirationDatePicker.getDayOfMonth());
 
                 try{
+                    String name = nameTxt.getText().toString();
+                    int quantity = Integer.parseInt(quantityTxt.getText().toString());
+                    Date expirationDate = new Date(expirationDatePicker.getYear() - 1900,expirationDatePicker.getMonth(),expirationDatePicker.getDayOfMonth());
                     DomainController.getInstance().addProduct(name,quantity,expirationDate);
                     showListActivity();
 
-                }catch(IllegalArgumentException ex){
+                } catch(NumberFormatException ex){
+                    Snackbar.make(view, "There was no valid number in the quantity field", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                } catch(IllegalArgumentException ex){
                       Snackbar.make(view, ex.getMessage(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 }
-              }
+            }
         });
 
 
