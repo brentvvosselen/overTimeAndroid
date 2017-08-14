@@ -78,13 +78,10 @@
                 style="@android:style/Widget.DeviceDefault.DatePicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/expiration_date_lbl"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="19dp"
-                android:elevation="24dp"
+                android:layout_margin="20dp"
                 android:headerBackground="#33FFFFFF"
-                android:paddingLeft="5dp"
-                android:theme="@android:style/ThemeOverlay.Material.Dark" />
+                android:theme="@android:style/ThemeOverlay.Material.Dark"
+                android:layout_below="@+id/expiration_date_lbl" />
 
             <Button
                 android:id="@+id/add_btn"

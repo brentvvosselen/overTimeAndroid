@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
 import com.example.brentvanvosselen.overtime.domain.DomainController;
 
@@ -28,10 +30,7 @@ public class AddProductActivity extends AppCompatActivity {
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getSupportActionBar().hide();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow(); // in Activity's onCreate() for instance
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
+
 
         setContentView(R.layout.activity_add_product);
 
@@ -73,6 +72,7 @@ public class AddProductActivity extends AppCompatActivity {
                     showListActivity();
 
                 } catch(NumberFormatException ex){
+
                     Snackbar.make(view, "There was no valid number in the quantity field", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 } catch(IllegalArgumentException ex){
