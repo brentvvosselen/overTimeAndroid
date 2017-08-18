@@ -1,12 +1,12 @@
-package com.example.brentvanvosselen.overtime;
+package com.example.brentvanvosselen.overtime.ui;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,10 +14,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.example.brentvanvosselen.overtime.R;
+import com.example.brentvanvosselen.overtime.adapter.ProductAdapter;
 import com.example.brentvanvosselen.overtime.domain.DomainController;
 
 public class ListActivity extends AppCompatActivity {
 
+    private RecyclerView recView;
+    private ProductAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +34,7 @@ public class ListActivity extends AppCompatActivity {
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
 
-        
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,8 +45,13 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
-        TextView list = (TextView)findViewById(R.id.list);
-        list.setText(renderList());
+        //the recyclerview item in content_list.xml
+        recView = (RecyclerView)findViewById(R.id.product_rec_list);
+        //layoutmanager: GridlayoutManager or StaggeredGridLayoutManager;
+        recView.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter = new ProductAdapter(DomainController.getInstance().getProductNames(),this);
+        recView.setAdapter(adapter);
 
 
 
