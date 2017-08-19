@@ -12,16 +12,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.example.brentvanvosselen.overtime.R;
 import com.example.brentvanvosselen.overtime.adapter.ProductAdapter;
 import com.example.brentvanvosselen.overtime.domain.DomainController;
 
-public class ListActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class ListActivity extends AppCompatActivity implements ProductAdapter.ItemClickCallback{
+    private static final String BUNDLE_EXTRAS = "BUNDLE_EXTRAS";
+    private static final String EXTRA_QUOTE = "EXTRA_QUOTE";
+
 
     private RecyclerView recView;
     private ProductAdapter adapter;
+    private ArrayList listData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +50,8 @@ public class ListActivity extends AppCompatActivity {
             }
         });
 
+        //set the listdata
+        listData = (ArrayList)DomainController.getInstance().getProductNames();
         //the recyclerview item in content_list.xml
         recView = (RecyclerView)findViewById(R.id.product_rec_list);
         //layoutmanager: GridlayoutManager or StaggeredGridLayoutManager;
@@ -52,6 +59,9 @@ public class ListActivity extends AppCompatActivity {
 
         adapter = new ProductAdapter(DomainController.getInstance().getProductNames(),this);
         recView.setAdapter(adapter);
+        adapter.setItemClickCallback(this);
+
+
 
 
 
@@ -92,5 +102,21 @@ public class ListActivity extends AppCompatActivity {
             txt += name + " , ";
         }
         return txt;
+    }
+
+    @Override
+    public void onItemClick(int p) {
+        String item = (String)listData.get(p);
+        Intent i = new Intent(this, ProductDetailsActivity.class);
+
+        Bundle extras = new Bundle();
+        extras.putString(EXTRA_QUOTE,item);
+
+        i.putExtra(BUNDLE_EXTRAS,extras);
+        startActivity(i);
+
+        //pas new data and update
+        //adapter.setListData(listData);
+        //adapter.notifyDataSetChanged();
     }
 }

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.brentvanvosselen.overtime.ProductDetailsActivity">
+    tools:context="com.example.brentvanvosselen.overtime.ui.ProductDetailsActivity">
 
-    <include layout="@layout/content_list" />
+    <include layout="@layout/content_product_details" />
 
 </android.support.constraint.ConstraintLayout>

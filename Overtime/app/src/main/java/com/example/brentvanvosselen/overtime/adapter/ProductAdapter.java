@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.brentvanvosselen.overtime.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +20,21 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
     private List<String> listData;
     private LayoutInflater inflater;
+
+    private ItemClickCallback itemClickCallback;
+
+    public interface ItemClickCallback{
+        void onItemClick(int p);
+    }
+
+    public void setItemClickCallback(final ItemClickCallback itemClickCallback){
+        this.itemClickCallback = itemClickCallback;
+    }
+
+    public void setListData(ArrayList<String> list){
+        this.listData.clear();
+        this.listData.addAll(list);
+    }
 
     public ProductAdapter(List<String> listData, Context c) {
         this.inflater = LayoutInflater.from(c);
@@ -37,12 +53,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         holder.productName.setText(item);
     }
 
+
     @Override
     public int getItemCount() {
         return listData.size();
     }
 
-    class ProductHolder extends RecyclerView.ViewHolder{
+    class ProductHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView productName;
         private View container;
@@ -51,6 +68,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
             productName = (TextView)itemView.findViewById(R.id.product_name_list_txt);
             container = itemView.findViewById(R.id.product_item_root);
+            container.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if(view.getId() == R.id.product_item_root){
+                itemClickCallback.onItemClick(getAdapterPosition());
+            }
         }
     }
 }
