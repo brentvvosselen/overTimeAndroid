@@ -64,7 +64,7 @@ public class AddProductActivity extends AppCompatActivity {
                     String name = nameTxt.getText().toString();
                     int quantity = Integer.parseInt(quantityTxt.getText().toString());
                     Date expirationDate = new Date(expirationDatePicker.getYear() - 1900,expirationDatePicker.getMonth(),expirationDatePicker.getDayOfMonth());
-                    DomainController.getInstance().addProduct(name,quantity,expirationDate);
+                    DomainController.getInstance().addProduct(name,quantity,expirationDate,DomainController.getInstance().getProducts().size());
                     showListActivity();
 
                 } catch(NumberFormatException ex){

@@ -11,14 +11,16 @@ public class Product {
     private String name;
     private int quantity;
     private Date expirationDate;
+    private int id;
 
-    public Product(String name, int quantity, Date expirationDate) {
+    public Product(String name, int quantity, Date expirationDate,int id) {
         checkName(name);
         this.name = name;
         checkQuantity(quantity);
         this.quantity = quantity;
         checkExpirationDate(expirationDate);
         this.expirationDate = expirationDate;
+        this.id = id;
     }
 
     public String getName() {
@@ -31,6 +33,9 @@ public class Product {
         this.name = name;
     }
 
+    public int getId() {
+        return id;
+    }
     public int getQuantity() {
         return quantity;
     }
@@ -44,10 +49,7 @@ public class Product {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
-        checkExpirationDate(expirationDate);
-        this.expirationDate = expirationDate;
-    }
+
 
     /*check functions*/
     private void checkQuantity(int quantity){
@@ -66,4 +68,6 @@ public class Product {
        if (name.isEmpty() || name.trim().isEmpty())
                 throw new IllegalArgumentException("The name can't be empty");
     }
+
+
 }

@@ -18,11 +18,19 @@ public class DomainController {
         return domainController;
     }
 
-    public void addProduct(String name, int quantity, Date expirationDate){
-        productRepository.addProduct(name,quantity,expirationDate);
+    public void addProduct(String name, int quantity, Date expirationDate,int id){
+        productRepository.addProduct(name,quantity,expirationDate,id);
     }
 
     public List<String> getProductNames() {
         return productRepository.getProductNames();
+    }
+
+    public List<Product> getProducts() {
+        return productRepository.getProducts();
+    }
+
+    public Product getProductById(int id) {
+        return productRepository.getProductById(id);
     }
 }

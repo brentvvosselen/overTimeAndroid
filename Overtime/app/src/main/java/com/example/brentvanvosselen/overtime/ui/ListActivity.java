@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import com.example.brentvanvosselen.overtime.R;
 import com.example.brentvanvosselen.overtime.adapter.ProductAdapter;
 import com.example.brentvanvosselen.overtime.domain.DomainController;
+import com.example.brentvanvosselen.overtime.domain.Product;
 
 import java.util.ArrayList;
 
@@ -51,22 +52,17 @@ public class ListActivity extends AppCompatActivity implements ProductAdapter.It
         });
 
         //set the listdata
-        listData = (ArrayList)DomainController.getInstance().getProductNames();
+        listData = (ArrayList)DomainController.getInstance().getProducts();
         //the recyclerview item in content_list.xml
         recView = (RecyclerView)findViewById(R.id.product_rec_list);
         //layoutmanager: GridlayoutManager or StaggeredGridLayoutManager;
         recView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new ProductAdapter(DomainController.getInstance().getProductNames(),this);
+        adapter = new ProductAdapter(DomainController.getInstance().getProducts(),this);
         recView.setAdapter(adapter);
         adapter.setItemClickCallback(this);
 
-
-
-
-
-
-    }
+}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -96,21 +92,13 @@ public class ListActivity extends AppCompatActivity implements ProductAdapter.It
         startActivity(intent);
     }
 
-    private String renderList(){
-        String txt = "";
-        for (String name: DomainController.getInstance().getProductNames()) {
-            txt += name + " , ";
-        }
-        return txt;
-    }
-
     @Override
     public void onItemClick(int p) {
-        String item = (String)listData.get(p);
+        int id = ((Product)listData.get(p)).getId();
         Intent i = new Intent(this, ProductDetailsActivity.class);
 
         Bundle extras = new Bundle();
-        extras.putString(EXTRA_QUOTE,item);
+        extras.putInt(EXTRA_QUOTE,id);
 
         i.putExtra(BUNDLE_EXTRAS,extras);
         startActivity(i);

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="8dp">
 
 
     <android.support.v7.widget.CardView
@@ -14,7 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        card_view:cardCornerRadius="4dp">
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="2dp"
+        card_view:cardUseCompatPadding="true"
+
+        >
 
         <RelativeLayout
             android:id="@+id/cont_product_item"
@@ -28,7 +32,6 @@
                 style="@android:style/TextAppearance.Material.Headline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
                 android:paddingLeft="16dp"
                 android:paddingTop="24dp"
                 android:text="Ham"
@@ -41,7 +44,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@id/cont_productname_lbl"
                 android:paddingLeft="16dp"
-                android:paddingTop="8dp"
+                android:paddingTop="16dp"
                 android:text="TextView" />
 
             <TextView
@@ -51,7 +54,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_below="@id/cont_quantity_lbl"
                 android:paddingLeft="16dp"
-                android:paddingTop="8dp"
+                android:paddingTop="16dp"
                 android:text="TextView" />
 
             <View
@@ -59,13 +62,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_below="@id/cont_expiration_lbl"
-                android:layout_marginTop="8dp"
-                android:background="#bdbdbd" />
+                android:layout_marginTop="16dp"
+                android:background="#eee" />
 
             <Button
                 android:id="@+id/cont_show_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="56dp"
+                android:layout_height="46dp"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@+id/card_line"
                 android:background="@android:color/transparent"

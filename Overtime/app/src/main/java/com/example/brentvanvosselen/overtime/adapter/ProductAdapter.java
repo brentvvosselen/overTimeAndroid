@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.brentvanvosselen.overtime.R;
+import com.example.brentvanvosselen.overtime.domain.CustomFunctions;
+import com.example.brentvanvosselen.overtime.domain.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,7 @@ import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductHolder>{
 
-    private List<String> listData;
+    private List<Product> listData;
     private LayoutInflater inflater;
 
     private ItemClickCallback itemClickCallback;
@@ -32,12 +34,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
         this.itemClickCallback = itemClickCallback;
     }
 
-    public void setListData(ArrayList<String> list){
+    public void setListData(ArrayList<Product> list){
         this.listData.clear();
         this.listData.addAll(list);
     }
 
-    public ProductAdapter(List<String> listData, Context c) {
+    public ProductAdapter(List<Product> listData, Context c) {
         this.inflater = LayoutInflater.from(c);
         this.listData = listData;
     }
@@ -50,8 +52,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
 
     @Override
     public void onBindViewHolder(ProductHolder holder, int position) {
-        String item = listData.get(position);
-        holder.productName.setText(item);
+        Product p =  listData.get(position);
+        holder.productName.setText(p.getName());
+        holder.quantity.setText(p.getQuantity() + " pcs.");
+        holder.expirationDate.setText(CustomFunctions.getDateString(p.getExpirationDate()));
+
     }
 
 
@@ -63,6 +68,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
     class ProductHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView productName;
+        private TextView quantity;
+        private TextView expirationDate;
         private Button buttonShow;
 
         private View container;
@@ -70,6 +77,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
             super(itemView);
 
             productName = (TextView)itemView.findViewById(R.id.cont_productname_lbl);
+            quantity = (TextView)itemView.findViewById(R.id.cont_quantity_lbl);
+            expirationDate =(TextView)itemView.findViewById(R.id.cont_expiration_lbl);
             buttonShow = (Button)itemView.findViewById(R.id.cont_show_btn);
             buttonShow.setOnClickListener(this);
             container = itemView.findViewById(R.id.product_item_root);
