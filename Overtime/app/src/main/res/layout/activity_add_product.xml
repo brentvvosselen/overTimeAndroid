@@ -7,6 +7,7 @@
     android:background="@drawable/background_gradient"
     android:elevation="10dp"
     android:fitsSystemWindows="false"
+    android:paddingTop="24dp"
     tools:context="com.example.brentvanvosselen.overtime.ui.AddProductActivity">
 
 
