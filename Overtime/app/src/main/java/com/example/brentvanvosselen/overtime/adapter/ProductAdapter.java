@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.brentvanvosselen.overtime.R;
@@ -62,18 +63,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductH
     class ProductHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView productName;
+        private Button buttonShow;
+
         private View container;
         public ProductHolder(View itemView) {
             super(itemView);
 
-            productName = (TextView)itemView.findViewById(R.id.product_name_list_txt);
+            productName = (TextView)itemView.findViewById(R.id.cont_productname_lbl);
+            buttonShow = (Button)itemView.findViewById(R.id.cont_show_btn);
+            buttonShow.setOnClickListener(this);
             container = itemView.findViewById(R.id.product_item_root);
-            container.setOnClickListener(this);
+            //container.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if(view.getId() == R.id.product_item_root){
+            if(view.getId() == R.id.cont_show_btn){
                 itemClickCallback.onItemClick(getAdapterPosition());
             }
         }
